@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>أهدافي</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#f4f6fb;--panel:#fff;--text:#14213d;--muted:#6b7694;--line:#dfe4f0;--accent:#4a7bff;--track:rgba(20,33,61,.08);--base:#3a4570;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#050d2b;--panel:#0d1a44;--text:#fff;--muted:#8d97bb;--line:#1b2858;--track:rgba(255,255,255,.1);--base:#0b1640}}
+:root[data-theme="dark"]{--bg:#050d2b;--panel:#0d1a44;--text:#fff;--muted:#8d97bb;--line:#1b2858;--track:rgba(255,255,255,.1);--base:#0b1640}
+html{background:var(--bg);scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}
+button{font-family:inherit;color:inherit}
+.app{max-width:520px;margin:0 auto;padding:14px 16px 40px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.ib{background:none;border:0;font-size:26px;width:44px;height:44px;display:grid;place-items:center;cursor:pointer;border-radius:12px}
+.ib.today{width:34px;height:34px;border:2px solid var(--text);border-radius:9px;font-size:13px;font-weight:700}
+.month{display:flex;align-items:center;gap:6px;font-weight:700;font-size:20px}
+.goals,.days{display:grid;grid-template-columns:repeat(7,1fr)}
+.goals{row-gap:5px;margin-bottom:10px}
+.bar{position:relative;height:26px;border:0;padding:0 8px;margin:0 1px;border-radius:8px;overflow:hidden;background:var(--base);color:#fff;font-size:12px;font-weight:600;text-align:start;cursor:pointer}
+.bar::before{content:"";position:absolute;inset:0;background:var(--c);opacity:.35}
+.bar .f{position:absolute;top:0;bottom:0;inset-inline-start:0;background:var(--c)}
+.bar span{position:relative;display:block;line-height:26px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.grp{margin:0 1px;border:2px solid;border-radius:12px;padding:2px 3px 3px;box-sizing:border-box;cursor:pointer;min-width:0}
+.gh{font-size:11px;font-weight:700;padding:0 4px 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gk{display:grid;row-gap:4px}
+.bar.cs{border-start-start-radius:0;border-end-start-radius:0}
+.bar.ce{border-start-end-radius:0;border-end-end-radius:0}
+.dn{text-align:center;color:var(--muted);font-size:13px;padding:6px 0}
+.dd{position:relative;height:56px;display:grid;place-items:center}
+.dd button{width:46px;height:46px;border-radius:50%;border:2px solid transparent;background:none;font-size:19px;cursor:pointer}
+.dd button.sel{background:var(--accent);color:#fff}
+.dd button.now:not(.sel){border-color:var(--accent)}
+.dots{position:absolute;bottom:0;display:flex;gap:3px}
+.dots i{width:5px;height:5px;border-radius:50%;background:var(--c)}
+.sep{height:1px;background:var(--line);margin:8px 0 6px}
+.t{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line)}
+.ck{width:28px;height:28px;border-radius:50%;border:2px solid var(--c);background:none;flex:none;cursor:pointer;color:#fff;font-size:15px;display:grid;place-items:center;padding:0}
+.t.done .ck{background:var(--c)}
+.tt{flex:1;background:none;border:0;font-size:16px;text-align:start;cursor:pointer;padding:0}
+.t.done .tt{text-decoration:line-through;color:var(--muted)}
+.tag{font-size:12px;color:var(--muted);white-space:nowrap}
+.empty{text-align:center;color:var(--muted);padding:44px 0;font-size:16px}
+.card{background:var(--panel);border-radius:14px;padding:4px 12px 12px;margin-bottom:12px}
+.ch{display:flex;align-items:center;gap:8px;padding:6px 0}.ch b{flex:1;font-size:17px}.ch small{color:var(--muted)}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center;z-index:20}
+.ov.on{display:flex}
+.sheet{background:var(--panel);width:100%;max-width:520px;max-height:92%;overflow-y:auto;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));box-sizing:border-box}
+.sheet h2{margin:0 0 6px;font-size:18px}
+label{display:block;font-size:13px;color:var(--muted);margin:12px 0 4px}
+input,select{width:100%;box-sizing:border-box;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit;font-size:16px}
+.row{display:flex;gap:8px}.row>*{flex:1;min-width:0}
+.sw{display:flex;gap:10px}
+.sw button{width:32px;height:32px;border-radius:50%;border:3px solid transparent;background:var(--c);cursor:pointer}
+.sw button.on{border-color:var(--text)}
+.mt{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:15px}
+.mt b{flex:1;font-weight:500}.mt small{color:var(--muted)}
+.btn{border:0;border-radius:12px;padding:12px 16px;font-size:16px;font-weight:600;cursor:pointer;background:var(--accent);color:#fff;flex:1}
+.btn.g{background:var(--track);color:var(--text)}.btn.r{background:#e5484d}
+.acts{display:flex;gap:8px;margin-top:12px}
+.err{color:#e5484d;font-size:13px;min-height:18px;margin-top:8px}
+body{font-family:"Readex Pro",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:transparent}
+html{background:radial-gradient(130% 55% at 50% 0%,color-mix(in srgb,var(--accent) 20%,var(--bg)),var(--bg) 72%) fixed,var(--bg)}
+.app{padding-bottom:128px}
+.month{font-size:21px}
+.wk{background:color-mix(in srgb,var(--panel) 72%,transparent);border:1px solid var(--line);border-radius:26px;padding:14px 8px 4px;backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.bar{height:28px;border-radius:10px}.bar span{line-height:28px}
+.grp{border-radius:16px}
+.dn{font-size:12px}
+.dd{height:62px}
+.dd button{width:44px;height:48px;border-radius:16px;font-size:18px;transition:transform .15s}
+.dd button:active{transform:scale(.92)}
+.dd button.sel{background:linear-gradient(135deg,#5b8cff,#7a5cff);box-shadow:0 6px 16px rgba(91,140,255,.4);font-weight:700}
+.sep{display:none}
+.lh{display:flex;justify-content:space-between;align-items:baseline;margin:20px 4px 0;font-weight:600}.lh small{color:var(--muted);font-weight:400;font-size:12px}
+.pb{height:4px;border-radius:2px;background:var(--track);margin:8px 4px 6px;overflow:hidden}.pb i{display:block;height:100%;background:linear-gradient(90deg,#5b8cff,#7a5cff);border-radius:2px}
+.t{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin:8px 0;transition:transform .2s}
+.t.done{opacity:.6}
+.card .t{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;margin:0}
+.ck:active{transform:scale(.85)}
+.nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-around;align-items:center;padding:8px 24px calc(8px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(16px);border-top:1px solid var(--line);z-index:10}
+.nav button{background:none;border:0;font-size:13px;color:var(--muted);cursor:pointer;min-width:70px;padding:8px}.nav button.on{color:var(--accent);font-weight:700}
+.nav .fab{width:58px;height:58px;min-width:0;border-radius:20px;margin-top:-30px;background:linear-gradient(135deg,#5b8cff,#7a5cff);color:#fff;font-size:30px;padding:0;box-shadow:0 8px 24px rgba(91,140,255,.5)}
+.sheet{border-radius:28px 28px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.4)}
+.sheet::before{content:"";display:block;width:40px;height:4px;border-radius:2px;background:var(--line);margin:-8px auto 12px}
+input,select{border-radius:14px;padding:12px}.btn{border-radius:14px}
+.ov.on{animation:fd .2s}.ov.on .sheet{animation:up .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes fd{from{opacity:0}}@keyframes up{from{transform:translateY(60px)}}
+.sl,.sr{animation:sw .3s ease}.sl{--x:-28px}.sr{--x:28px}
+@keyframes sw{from{opacity:0;transform:translateX(var(--x))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:root{--bg:#f2f2f7;--panel:#fff;--text:#000;--muted:#8a8a8e;--line:rgba(60,60,67,.16);--accent:#007aff;--track:rgba(120,120,128,.16)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--panel:#1c1c1e;--text:#fff;--muted:#8e8e93;--line:rgba(84,84,88,.55);--accent:#0a84ff;--track:rgba(120,120,128,.28)}}
+:root[data-theme="dark"]{--bg:#000;--panel:#1c1c1e;--text:#fff;--muted:#8e8e93;--line:rgba(84,84,88,.55);--accent:#0a84ff;--track:rgba(120,120,128,.28)}
+html{background:var(--bg)}
+body{font-family:-apple-system,"Inter","IBM Plex Sans Arabic","Segoe UI",Roboto,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.app{padding:8px 16px 120px}
+.top{margin:4px 4px 14px;align-items:flex-end}
+h1{margin:0;font-size:34px;line-height:1.1;font-weight:700;letter-spacing:-.4px}
+.tb{display:flex;align-items:center}
+.tb .ib{color:var(--accent);font-size:28px;width:34px;height:40px}
+.tx{background:none;border:0;color:var(--accent);font-size:17px;font-weight:500;padding:8px;cursor:pointer}
+.wk{background:var(--panel);border:0;border-radius:20px;padding:12px 6px 4px;backdrop-filter:none;box-shadow:none}
+.bar{height:28px;border-radius:14px;background:color-mix(in srgb,var(--c) 36%,#1c1c1e)}
+.bar::before{display:none}
+.bar span{font-size:12px;font-weight:600}
+.bar:active{transform:scale(.98)}
+.grp{border-width:1.5px;border-radius:20px}
+.dn{font-size:11px;font-weight:500}
+.dd{height:56px}
+.dd button{width:40px;height:40px;border-radius:50%;font-size:19px;font-weight:400}
+.dd button.sel{background:var(--accent);box-shadow:none;color:#fff;font-weight:600}
+.dd button.now:not(.sel){border-color:transparent;color:var(--accent);font-weight:600}
+.dots{bottom:3px}
+.lh{align-items:center;margin:22px 6px 10px}
+.lt{font-size:22px;font-weight:700}.ls{font-size:13px;color:var(--muted);margin-top:2px}
+.rg{width:44px;height:44px}.rt,.rp{fill:none;stroke-width:5}.rt{stroke:var(--track)}
+.rp{stroke:var(--accent);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%}
+.gl{background:#30d158;border-radius:16px;overflow:hidden}
+.t{background:var(--panel);border:0;border-bottom:.5px solid var(--line);border-radius:0;margin:0;padding:12px 16px}
+.gl .t:last-child{border-bottom:0}
+.t.done{opacity:1}
+.ck{width:24px;height:24px;border-width:1.5px}
+.tt{font-size:17px}.tag{font-size:13px}
+.card{border-radius:16px;padding:6px 16px 14px}.ch b{color:var(--accent);font-size:20px}
+.nav{left:14px;right:14px;bottom:calc(10px + env(safe-area-inset-bottom,0px));padding:6px;gap:6px;border:.5px solid var(--line);border-radius:34px;background:color-mix(in srgb,var(--panel) 72%,transparent);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);box-shadow:0 8px 32px rgba(0,0,0,.18)}
+.nav button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px;border-radius:26px;font-size:11px;font-weight:500}
+.nav button:active{transform:scale(.94)}
+.nav button.on{color:var(--accent);background:var(--track);font-weight:600}
+.nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav .fab{flex:none;width:52px;height:52px;margin:0;padding:0;justify-content:center;border-radius:50%;background:var(--accent);color:#fff;box-shadow:none}
+.nav .fab svg{stroke-width:2.4}
+.sheet{background:var(--bg);border-radius:34px 34px 0 0;padding:16px 16px calc(18px + env(safe-area-inset-bottom,0px))}
+.sheet h2{font-size:20px;text-align:center;margin:0 0 6px}
+label{margin:16px 6px 6px}
+input,select{background:var(--panel);border:0;border-radius:12px;padding:13px 14px}
+.mt{background:var(--panel);border:0;border-radius:12px;padding:10px 14px;margin-bottom:6px}
+.btn{padding:14px;border-radius:14px}.btn:active{opacity:.7}
+.btn.g{background:var(--panel);color:var(--accent)}.btn.r{background:var(--panel);color:#ff453a}
+.sw button{width:34px;height:34px;border:0;box-shadow:inset 0 0 0 2px rgba(255,255,255,.2)}
+.sw button.on{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--c)}
+.ov.on .sheet{animation:up .45s cubic-bezier(.32,.72,0,1)}
+html:root:not([data-x]){--bg:#050d2b;--panel:#0d1a45;--text:#fff;--muted:#9aa6cf;--line:rgba(255,255,255,.1);--accent:#4a7bff;--track:rgba(255,255,255,.12)}
+html{background:radial-gradient(90% 45% at 75% 0,rgba(74,123,255,.38),transparent 62%),radial-gradient(70% 40% at 5% 45%,rgba(64,200,224,.16),transparent 62%),linear-gradient(#041033,#050d2b 45%,#02061c) fixed}
+body{font-family:"Cairo","Segoe UI",system-ui,sans-serif}
+h1{font-size:32px;font-weight:800;letter-spacing:0}
+#mon{cursor:pointer}#mon::after{content:"▾";font-size:18px;color:var(--accent);margin-inline-start:8px}
+.app:has(#lists:not([hidden])) #mon::after{content:none}
+.wk,.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(18px)}
+.dd button.sel{background:#4a7bff}
+.bar{background:color-mix(in srgb,var(--c) 30%,#050d2b)}
+.t{background:#0d1a45}.card .t{background:none}
+.nav{background:rgba(8,18,56,.72);border-color:rgba(255,255,255,.12)}
+.nav .fab{background:#4a7bff}
+.sheet{background:#0a1438}
+input,select,.mt,.btn.g,.btn.r{background:rgba(255,255,255,.07)}
+.gc{text-decoration:none;font-size:16px}
+.mv{position:fixed;inset:0;z-index:15;background:#050d2b;overflow-y:auto;padding:calc(12px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.mvi{max-width:520px;margin:0 auto}
+.mh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.yr{display:flex;align-items:center;gap:6px;font-size:26px;font-weight:800}
+.mm{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0 16px}
+.mm button{background:rgba(255,255,255,.07);border:0;border-radius:14px;padding:10px 0;font-size:14px;font-weight:600;cursor:pointer}
+.mm button.on{background:var(--accent)}
+.mg,.mdn{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
+.mdn{color:var(--muted);font-size:12px;padding:4px 0}
+.mc{position:relative;height:58px;background:none;border:0;font-size:18px;font-weight:600;cursor:pointer;border-radius:14px}
+.mc.now{color:var(--accent)}.mc.sel{background:rgba(255,255,255,.1)}
+.mc .dots{left:0;right:0;justify-content:center;bottom:10px}
+.mst{position:absolute;left:5px;right:5px;bottom:3px;display:flex;flex-direction:column;gap:2px}.mst i{height:3px;border-radius:2px;background:var(--c)}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <h1 id="mon"></h1>
+    <div class="tb"><button class="ib" data-w="-7">›</button><button class="tx" id="tn" data-t="1">اليوم</button><button class="ib" data-w="7">‹</button></div>
+    
+  </div>
+  <div id="week">
+    <div class="wk"><div class="goals" id="goals"></div>
+    <div class="days" id="days"></div></div>
+    <div class="sep"></div>
+    <div id="list"></div>
+  </div>
+  <div id="lists" hidden></div>
+</div>
+<nav class="nav"><button id="nw" data-vv="week"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="4"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>الأسبوع</span></button><button id="nl" data-vv="lists"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg><span>القوائم</span></button><button class="fab" data-add="1"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></nav>
+<div class="mv" id="mv" hidden><div class="mvi" id="mvi"></div></div>
+<div class="ov" id="ov"><div class="sheet" id="sheet"></div></div>
+<script>
+const COLORS=['#0a84ff','#30d158','#ff9f0a','#ff453a','#bf5af2','#40c8e0'];
+const DN=['أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'];
+const KEY='weekly-goals-v1';
+let goals=[],loose=[],lists=[];
+try{const s=JSON.parse((window.Android&&Android.load())||localStorage.getItem(KEY)||'null');if(Array.isArray(s))goals=s;else if(s){goals=s.goals||[];loose=s.loose||[];lists=s.lists||[]}}catch(e){}
+const persist=()=>{const j=JSON.stringify({goals,loose,lists});try{localStorage.setItem(KEY,j)}catch(e){}try{window.Android&&Android.save(j)}catch(e){}};
+const pad=n=>String(n).padStart(2,'0');
+const iso=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const parse=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12)};
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const diff=(a,b)=>Math.round((parse(b)-parse(a))/864e5);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,9);
+const $=id=>document.getElementById(id);
+const todayS=iso(new Date());let sel=todayS,view='week',pend=null;
+const kids=g=>goals.filter(x=>x.parent===g.id);
+const tasksOf=g=>g.long?kids(g).flatMap(k=>k.tasks):g.tasks;
+const prog=g=>{const t=tasksOf(g);return t.length?t.filter(x=>x.done).length/t.length:0};
+const col=g=>{const p=g.parent&&goals.find(x=>x.id===g.parent);return p?p.color:g.color};
+
+function render(){
+  const lv=view==='lists';$('week').hidden=lv;$('lists').hidden=!lv;$('nw').classList.toggle('on',!lv);$('nl').classList.toggle('on',lv);
+  const s=parse(sel),ws=addDays(s,-((s.getDay()+1)%7)),wsS=iso(ws);
+  $('mon').textContent=lv?'القوائم':s.toLocaleDateString('ar-EG-u-nu-latn',{month:'long',year:'numeric'});
+  
+  if(lv)return renderLists();
+  const days=[...Array(7)].map((_,i)=>addDays(ws,i));
+  const seg=g=>{const a=diff(wsS,g.start),b=diff(wsS,g.end);return(b<0||a>6)?null:{g,a,b,s:Math.max(a,0),e:Math.min(b,6)}};
+  const pack=a=>{const ends=[];a.sort((x,y)=>x.s-y.s||y.e-x.e).forEach(it=>{let r=ends.findIndex(e=>e<it.s);if(r<0){r=ends.length;ends.push(0)}ends[r]=it.e;it.r=r})};
+  const shade=(c,i)=>i%3===0?`color-mix(in srgb,${c} 60%,#fff)`:i%3===1?c:`color-mix(in srgb,${c} 70%,#000)`;
+  const bar=(x,c,off)=>{const{g,a,b,s,e}=x,p=prog(g),f=Math.max(0,Math.min(1,(p*(b-a+1)-(s-a))/(e-s+1)));return `<button class="bar${a<0?' cs':''}${b>6?' ce':''}" data-g="${g.id}" style="--c:${c};grid-column:${s-off+1}/${e-off+2};grid-row:${x.r+1}"><i class="f" style="width:${f*100}%"></i><span>${esc(g.title)} · ${Math.round(p*100)}%</span></button>`};
+  const tops=[];
+  goals.filter(g=>g.long).forEach(L=>{
+    const ls=seg(L),ks=kids(L).map(seg).filter(Boolean),all=ks.concat(ls||[]);
+    if(all.length)tops.push({s:Math.min(...all.map(x=>x.s)),e:Math.max(...all.map(x=>x.e)),L,ks});
+  });
+  goals.filter(g=>!g.long&&!(g.parent&&goals.some(x=>x.id===g.parent))).forEach(g=>{const x=seg(g);if(x)tops.push({s:x.s,e:x.e,x})});
+  pack(tops);
+  $('goals').innerHTML=tops.map(it=>{
+    if(it.x)return bar({...it.x,r:it.r},col(it.x.g),0);
+    const{L,ks,s,e}=it,p=prog(L);pack(ks);
+    const kb=ks.map(x=>bar(x,shade(L.color,kids(L).indexOf(x.g)),s)).join('');
+    return `<div class="grp" data-g="${L.id}" style="grid-column:${s+1}/${e+2};grid-row:${it.r+1};border-color:${L.color};background:color-mix(in srgb,${L.color} ${Math.round(15+85*p)}%,transparent)"><div class="gh" style="color:${p>.5?'#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)':'var(--text)'}">${esc(L.title)} · ${Math.round(p*100)}%</div><div class="gk" style="grid-template-columns:repeat(${e-s+1},1fr)">${kb}</div></div>`;
+  }).join('');
+  $('days').innerHTML=days.map(d=>`<div class="dn">${DN[d.getDay()]}</div>`).join('')+days.map(d=>{
+    const k=iso(d),cs=goals.filter(g=>g.tasks.some(t=>t.date===k)).map(col);
+    if(loose.some(t=>t.date===k))cs.push('var(--muted)');
+    return `<div class="dd"><button data-d="${k}" class="${k===sel?'sel':''}${k===todayS?' now':''}">${d.getDate()}</button><span class="dots">${cs.slice(0,3).map(c=>`<i style="--c:${c}"></i>`).join('')}</span></div>`;
+  }).join('');
+  const items=[];
+  goals.forEach(g=>g.tasks.forEach(t=>{if(t.date===sel)items.push({c:col(g),t,k:g.id+'|'+t.id,o:`data-g="${g.id}"`,tag:g.title})}));
+  loose.forEach(t=>{if(t.date===sel)items.push({c:'var(--muted)',t,k:'L|'+t.id,o:`data-lt="${t.id}"`,tag:''})});
+  $('list').innerHTML=hdr(items)+(items.length?'<div class="gl">'+items.map(({c,t,k,o,tag})=>`<div class="t${t.done?' done':''}" data-sw="${k}" style="--c:${c}"><button class="ck" data-k="${k}">${t.done?'✓':''}</button><button class="tt" ${o}>${esc(t.title)}</button><span class="tag">${esc(tag)}</span></div>`).join('')+'</div>':`<div class="empty">${goals.length||loose.length?'لا توجد مهام في هذا اليوم<br><small>اضغط مطولًا على اليوم لإضافة مهمة</small>':'اضغط + للبدء'}</div>`);
+}
+function renderLists(){
+  $('lists').innerHTML=lists.map(l=>`<div class="card"><div class="ch"><b>${esc(l.title)}</b><small>${l.items.filter(i=>i.done).length}/${l.items.length}</small><button class="ib" data-dl="${l.id}" style="font-size:${pend===l.id?13:18}px;width:${pend===l.id?64:36}px;height:36px">${pend===l.id?'تأكيد؟':'🗑'}</button></div>
+${l.items.map(i=>`<div class="t${i.done?' done':''}" style="--c:var(--accent)"><button class="ck" data-li="${l.id}|${i.id}">${i.done?'✓':''}</button><span class="tt" style="cursor:default">${esc(i.title)}</span><button class="ib" data-ri="${l.id}|${i.id}" style="font-size:16px;width:32px;height:32px">✕</button></div>`).join('')}
+<div class="row" style="margin-top:10px"><input data-ni="${l.id}" placeholder="عنصر جديد"><button class="btn g" data-ai="${l.id}" style="flex:none">+</button></div></div>`).join('')||'<div class="empty">لا توجد قوائم. اضغط + لإنشاء قائمة</div>';
+}
+function addItem(id){
+  const inp=document.querySelector(`input[data-ni="${id}"]`),v=inp.value.trim();if(!v)return;
+  lists.find(x=>x.id===id).items.push({id:uid(),title:v,done:false});persist();render();
+  document.querySelector(`input[data-ni="${id}"]`).focus();
+}
+
+let draft=null,m=null;
+const show=()=>$('ov').classList.add('on');
+function closeS(){$('ov').classList.remove('on');draft=null;m=null}
+function choose(){
+  $('sheet').innerHTML=`<h2>إضافة</h2><div class="acts" style="flex-direction:column">${[['long','هدف طويل المدى'],['short','هدف قصير المدى'],['task','مهمة عادية'],['list','قائمة (زي التسوق)'],['bk','نسخ احتياطي / استيراد']].map(([k,v])=>`<button class="btn g" data-new="${k}">${v}</button>`).join('')}</div>`;show();
+}
+function openS(id,kind){
+  const g=id&&goals.find(x=>x.id===id);
+  draft=g?JSON.parse(JSON.stringify(g)):{id:uid(),title:'',color:COLORS.find(c=>!goals.some(x=>x.color===c))||COLORS[0],start:sel,end:iso(addDays(parse(sel),kind==='long'?30:6)),tasks:[],isNew:true,long:kind==='long',parent:''};
+  show();draw();
+}
+function sync(){draft.title=$('gt').value;draft.start=$('gs').value;draft.end=$('ge').value;const p=$('gp');if(p)draft.parent=p.value}
+function draw(err){
+  const d=draft,n=d.tasks.length;
+  d.tasks.sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:0);
+  const body=d.long?`<label>الأهداف القصيرة المرتبطة (التقدم = المهام المخلّصة من كل مهامها)</label>${kids(d).map(k=>`<div class="mt"><b>${esc(k.title)}</b><small>${Math.round(prog(k)*100)}%</small></div>`).join('')||'<div class="mt"><small>اربط أهدافًا قصيرة من خانة "ضمن هدف طويل المدى" عند إضافتها.</small></div>'}`:
+`<label>المهام${n?` (كل مهمة = ${Math.round(100/n)}% من الهدف)`:''}</label>
+${d.tasks.map(t=>`<div class="mt"><b>${esc(t.title)}</b><small>${t.date}</small><a class="gc" target="_blank" rel="noopener" href="${gcal(t.title,t.date)}">📅</a><button class="ib" data-rt="${t.id}" style="width:36px;height:36px;font-size:18px">✕</button></div>`).join('')}
+<div class="row" style="margin-top:10px"><input id="nt" value="${esc(d.nt||'')}" placeholder="مهمة جديدة"><input id="nd" type="date" value="${d.nd||d.start}"></div>
+<div class="acts"><button class="btn g" data-a="addt">+ إضافة المهمة</button></div>`;
+  $('sheet').innerHTML=`<h2>${d.isNew?'جديد: ':''}${d.long?'هدف طويل المدى':'هدف قصير المدى'}</h2>
+<label>اسم الهدف</label><input id="gt" value="${esc(d.title)}" placeholder="مثال: إنهاء كورس الألماني">
+${d.long?'':`<label>ضمن هدف طويل المدى</label><select id="gp"><option value="">بدون</option>${goals.filter(x=>x.long).map(x=>`<option value="${x.id}"${x.id===d.parent?' selected':''}>${esc(x.title)}</option>`).join('')}</select>`}
+${d.parent?'':`<label>اللون</label><div class="sw">${COLORS.map(c=>`<button data-col="${c}" class="${c===d.color?'on':''}" style="--c:${c}"></button>`).join('')}</div>`}
+<div class="row"><div><label>من يوم</label><input id="gs" type="date" value="${d.start}"></div><div><label>إلى يوم</label><input id="ge" type="date" value="${d.end}"></div></div>
+${body}
+<div class="err">${err||''}</div>
+<div class="acts"><button class="btn" data-a="save">حفظ</button><button class="btn g" data-a="close">إلغاء</button></div>
+${d.isNew?'':`<div class="acts"><button class="btn r" data-a="del">${d.confirm?'اضغط مرة أخرى للتأكيد':'حذف الهدف'}</button></div>`}`;
+}
+function act(a){
+  if(a==='close')return closeS();
+  sync();
+  if(a==='addt'){
+    const t=$('nt').value.trim(),dt=$('nd').value;draft.nt=t;draft.nd=dt;
+    if(!t)return draw('اكتب اسم المهمة');
+    if(!dt||dt<draft.start||dt>draft.end)return draw('تاريخ المهمة لازم يكون داخل مدى الهدف');
+    draft.tasks.push({id:uid(),title:t,date:dt,done:false});draft.nt='';return draw();
+  }
+  if(a==='save'){
+    if(!draft.title.trim())return draw('اكتب اسم الهدف');
+    if(!draft.start||!draft.end||draft.end<draft.start)return draw('تأكد من تاريخ البداية والنهاية');
+    if(draft.tasks.some(t=>t.date<draft.start||t.date>draft.end))return draw('فيه مهام خارج مدى الهدف');
+    const{isNew,nd,nt,confirm,...g}=draft;g.title=g.title.trim();
+    const i=goals.findIndex(x=>x.id===g.id);if(i<0)goals.push(g);else goals[i]=g;
+    persist();sel=g.start;view='week';closeS();return render();
+  }
+  if(a==='del'){
+    if(!draft.confirm){draft.confirm=true;return draw()}
+    goals.forEach(x=>{if(x.parent===draft.id)x.parent=''});
+    goals=goals.filter(x=>x.id!==draft.id);persist();closeS();render();
+  }
+}
+function openM(kind,id){
+  const t=id&&loose.find(x=>x.id===id);
+  m=t?{...t,kind:'task'}:{kind,id:uid(),title:'',date:sel,done:false,isNew:true};show();drawM();
+}
+function drawM(err){
+  const k=m.kind==='task';
+  $('sheet').innerHTML=`<h2>${k?'مهمة':'قائمة جديدة'}</h2><label>${k?'المهمة':'اسم القائمة'}</label><input id="mi" value="${esc(m.title)}" placeholder="${k?'مثال: تجديد الرخصة':'مثال: قائمة التسوق'}">${k?`<label>اليوم</label><input id="md" type="date" value="${m.date}">`:''}<div class="err">${err||''}</div><div class="acts"><button class="btn" data-m="save">حفظ</button><button class="btn g" data-m="close">إلغاء</button></div>${k&&!m.isNew?`<div class="acts"><a class="btn g" style="text-align:center;text-decoration:none" target="_blank" rel="noopener" href="${gcal(m.title,m.date)}">إضافة إلى Google Calendar</a></div><div class="acts"><button class="btn r" data-m="del">حذف المهمة</button></div>`:''}`;
+}
+function mact(a){
+  if(a==='close')return closeS();
+  if(a==='del'){loose=loose.filter(x=>x.id!==m.id);persist();closeS();return render()}
+  m.title=$('mi').value.trim();if(m.kind==='task')m.date=$('md').value;
+  if(!m.title)return drawM('اكتب الاسم');
+  if(m.kind==='task'){
+    if(!m.date)return drawM('اختر اليوم');
+    const{kind,isNew,...t}=m,i=loose.findIndex(x=>x.id===t.id);if(i<0)loose.push(t);else loose[i]=t;sel=t.date;view='week';
+  }else{lists.push({id:m.id,title:m.title,items:[]});view='lists'}
+  persist();closeS();render();
+}
+document.addEventListener('click',e=>{
+  const c=s=>e.target.closest(s);let el;
+  if(e.target.id==='ov')closeS();
+  else if(el=c('[data-k]')){const[gid,tid]=el.dataset.k.split('|');const arr=gid==='L'?loose:goals.find(g=>g.id===gid).tasks;const t=arr.find(t=>t.id===tid);t.done=!t.done;persist();render()}
+  else if(el=c('[data-d]')){sel=el.dataset.d;render()}
+  else if(el=c('[data-w]')){sel=iso(addDays(parse(sel),+el.dataset.w));render()}
+  else if(c('[data-t]')){sel=todayS;view='week';render()}
+  else if(c('[data-v]')){view=view==='week'?'lists':'week';render()}
+  else if(c('[data-add]'))choose();
+  else if(el=c('[data-new]')){const k=el.dataset.new;if(k==='long'||k==='short')openS(null,k);else if(k==='bk')openBK();else openM(k)}
+  else if(el=c('[data-lt]'))openM('task',el.dataset.lt);
+  else if(el=c('[data-g]'))openS(el.dataset.g);
+  else if(el=c('[data-col]')){sync();draft.color=el.dataset.col;draw()}
+  else if(el=c('[data-rt]')){sync();draft.tasks=draft.tasks.filter(t=>t.id!==el.dataset.rt);draw()}
+  else if(el=c('[data-a]'))act(el.dataset.a);
+  else if(el=c('[data-m]'))mact(el.dataset.m);
+  else if(el=c('[data-li]')){const[l,i]=el.dataset.li.split('|');const it=lists.find(x=>x.id===l).items.find(x=>x.id===i);it.done=!it.done;persist();render()}
+  else if(el=c('[data-ri]')){const[l,i]=el.dataset.ri.split('|');const L=lists.find(x=>x.id===l);L.items=L.items.filter(x=>x.id!==i);persist();render()}
+  else if(el=c('[data-ai]'))addItem(el.dataset.ai);
+  else if(el=c('[data-dl]')){const id=el.dataset.dl;if(pend===id){lists=lists.filter(x=>x.id!==id);pend=null;persist()}else pend=id;render()}
+});
+document.addEventListener('change',e=>{if(e.target.id==='gp'&&draft){sync();draw()}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset&&e.target.dataset.ni)addItem(e.target.dataset.ni)});
+function hdr(it){if(!it.length)return'';const n=it.filter(i=>i.t.done).length;return `<div class="lh"><span>${parse(sel).toLocaleDateString('ar-EG-u-nu-latn',{weekday:'long',day:'numeric',month:'long'})}</span><small>${n}/${it.length} · اسحب المهمة للإنجاز</small></div><div class="pb"><i style="width:${n/it.length*100}%"></i></div>`}
+const vib=n=>{try{navigator.vibrate&&navigator.vibrate(n)}catch(e){}};
+function tog(k){const[g,i]=k.split('|');const arr=g==='L'?loose:goals.find(x=>x.id===g).tasks;const t=arr.find(x=>x.id===i);t.done=!t.done;persist();vib(12);render()}
+let sx=0,sy=0,st=0,tgt=null,row0=null,lpT=null,lpf=false,sTop=false;
+document.addEventListener('click',e=>{const b=e.target.closest('[data-vv]');if(lpf){lpf=false;e.stopPropagation();e.preventDefault()}else if(b){view=b.dataset.vv;render()}},true);
+document.addEventListener('contextmenu',e=>{if(e.target.closest('[data-d]'))e.preventDefault()});
+document.addEventListener('touchstart',e=>{
+  const t=e.touches[0];sx=t.clientX;sy=t.clientY;st=Date.now();tgt=e.target;
+  row0=tgt.closest('.t[data-sw]');
+  sTop=!!tgt.closest('.sheet')&&sy<$('sheet').getBoundingClientRect().top+64;
+  const d=tgt.closest('[data-d]');clearTimeout(lpT);
+  if(d)lpT=setTimeout(()=>{lpf=true;vib(20);sel=d.dataset.d;view='week';render();openM('task')},520);
+},{passive:true});
+document.addEventListener('touchmove',e=>{
+  const t=e.touches[0],dx=t.clientX-sx;
+  if(Math.abs(dx)>10||Math.abs(t.clientY-sy)>10)clearTimeout(lpT);
+  if(row0&&Math.abs(dx)>12)row0.style.transform=`translateX(${dx*.55}px)`;
+},{passive:true});
+document.addEventListener('touchend',e=>{
+  clearTimeout(lpT);
+  const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+  if(row0)row0.style.transform='';
+  if(sTop&&dy>90&&dy>Math.abs(dx))return closeS();
+  if(Date.now()-st>700||Math.abs(dx)<70||Math.abs(dx)<Math.abs(dy)*1.5)return;
+  if(row0)return tog(row0.dataset.sw);
+  if(tgt.closest('#week')&&!$('ov').classList.contains('on')){
+    sel=iso(addDays(parse(sel),dx>0?7:-7));render();
+    const w=$('week');w.classList.remove('sl','sr');void w.offsetWidth;w.classList.add(dx>0?'sl':'sr');
+  }
+},{passive:true});
+function hdr(it){if(!it.length)return'';const n=it.filter(i=>i.t.done).length,C=2*Math.PI*17;return `<div class="lh"><div><div class="lt">${parse(sel).toLocaleDateString('ar-EG-u-nu-latn',{weekday:'long',day:'numeric',month:'long'})}</div><div class="ls">${n} من ${it.length} مكتملة · اسحب المهمة للإنجاز</div></div><svg class="rg" viewBox="0 0 44 44"><circle class="rt" cx="22" cy="22" r="17"/><circle class="rp" cx="22" cy="22" r="17" stroke-dasharray="${C*n/it.length} ${C}"/></svg></div>`}
+const gcal=(t,d)=>'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(t)+'&dates='+d.replace(/-/g,'')+'/'+iso(addDays(parse(d),1)).replace(/-/g,'');
+const MN=[...Array(12)].map((_,i)=>new Date(2026,i,1).toLocaleDateString('ar-EG-u-nu-latn',{month:'long'}));
+let mv=null,lpM=null;
+function openMV(){const s=parse(sel);mv={y:s.getFullYear(),m:s.getMonth()};$('mv').hidden=false;drawMV()}
+function closeMV(){mv=null;$('mv').hidden=true}
+function drawMV(){
+  const{y,m}=mv,off=(new Date(y,m,1,12).getDay()+1)%7,dim=new Date(y,m+1,0).getDate();
+  let c='<i></i>'.repeat(off);
+  for(let d=1;d<=dim;d++){
+    const k=y+'-'+pad(m+1)+'-'+pad(d),cs=goals.filter(g=>g.tasks.some(t=>t.date===k)).map(col);
+    if(loose.some(t=>t.date===k))cs.push('var(--muted)');
+    const st=goals.filter(g=>g.start<=k&&k<=g.end).slice(0,2).map(g=>`<i style="--c:${col(g)}"></i>`).join('');
+    c+=`<button class="mc${k===todayS?' now':''}${k===sel?' sel':''}" data-md="${k}">${d}<span class="dots">${cs.slice(0,3).map(x=>`<i style="--c:${x}"></i>`).join('')}</span><span class="mst">${st}</span></button>`;
+  }
+  $('mvi').innerHTML=`<div class="mh"><button class="tx" data-mc="1">إغلاق</button><div class="yr"><button class="ib" data-my="-1">›</button><span>${y}</span><button class="ib" data-my="1">‹</button></div><span style="width:56px"></span></div><div class="mm">${MN.map((n,i)=>`<button data-mm="${i}" class="${i===m?'on':''}">${n}</button>`).join('')}</div><div class="mdn">${[6,0,1,2,3,4,5].map(i=>`<div>${DN[i]}</div>`).join('')}</div><div class="mg">${c}</div><div class="empty" style="padding:18px 0;font-size:13px">اضغط على يوم لعرضه، واضغط مطولًا لإضافة مهمة، واسحب للتنقل بين الشهور</div>`;
+}
+const r0=render;render=()=>{r0();if(mv)drawMV()};
+document.addEventListener('click',e=>{
+  const c=s=>e.target.closest(s);let el;
+  if(c('#mon')&&view==='week'&&!mv)openMV();
+  else if(el=c('[data-md]')){sel=el.dataset.md;view='week';closeMV();render()}
+  else if(el=c('[data-mm]')){mv.m=+el.dataset.mm;drawMV()}
+  else if(el=c('[data-my]')){mv.y+=+el.dataset.my;drawMV()}
+  else if(c('[data-mc]'))closeMV();
+});
+document.addEventListener('touchstart',e=>{const d=e.target.closest('[data-md]');clearTimeout(lpM);if(d)lpM=setTimeout(()=>{lpf=true;vib(20);sel=d.dataset.md;openM('task')},520)},{passive:true});
+document.addEventListener('touchmove',()=>clearTimeout(lpM),{passive:true});
+document.addEventListener('touchend',e=>{
+  clearTimeout(lpM);if(!mv)return;
+  const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+  if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.5&&e.target.closest('.mg')){
+    mv.m+=dx>0?1:-1;if(mv.m>11){mv.m=0;mv.y++}if(mv.m<0){mv.m=11;mv.y--}drawMV();
+  }
+},{passive:true});
+function openBK(){$('sheet').innerHTML=`<h2>نسخ احتياطي / استيراد</h2><label>انسخ هذا النص للاحتفاظ ببياناتك، أو الصق نصًا هنا واضغط استيراد</label><textarea id="bk" style="width:100%;height:170px;box-sizing:border-box;border:0;border-radius:12px;padding:12px;background:rgba(255,255,255,.07);color:inherit;font:12px monospace;direction:ltr">${esc(JSON.stringify({goals,loose,lists}))}</textarea><div class="err" id="bke"></div><div class="acts"><button class="btn" data-bk="imp">استيراد</button><button class="btn g" data-bk="x">إغلاق</button></div>`;show()}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-bk]');if(!b)return;if(b.dataset.bk==='x')return closeS();try{const s=JSON.parse($('bk').value);if(typeof s!=='object'||!s)throw 0;goals=s.goals||[];loose=s.loose||[];lists=s.lists||[];persist();closeS();render()}catch(x){$('bke').textContent='النص غير صالح'}});
+render();
+</script>
+</body>
+</html>
