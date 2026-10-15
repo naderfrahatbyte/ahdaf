@@ -17,9 +17,10 @@ jobs:
           gradle-version: 8.9
       - name: Build
         run: |
-          find . -not -path './.git/*' | head -60
+          Z=$(find . -maxdepth 1 -name '*.zip' | head -n 1)
+          if [ -n "$Z" ]; then unzip -oq "$Z" -d proj; fi
           S=$(find . -name settings.gradle.kts -not -path './.git/*' | head -n 1)
-          if [ -z "$S" ]; then echo "settings.gradle.kts not found"; exit 1; fi
+          if [ -z "$S" ]; then echo "settings.gradle.kts not found"; find . -not -path './.git/*' | head -60; exit 1; fi
           cd "$(dirname "$S")"
           gradle assembleDebug --no-daemon
       - uses: actions/upload-artifact@v4
